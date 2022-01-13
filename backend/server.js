@@ -21,6 +21,12 @@ connection.once('open', ()=> {
     console.log("MONGO DB Connection Successfull");
 })
 
+const exercisesRouter=require('./routes/exercises')
+const usersRouter=require('./routes/users')
+
+app.use('/exercises', exercisesRouter);
+app.use('/users', usersRouter)
+
 app.listen(port, ()=>{
     console.log(` My Server is Running:${port}`);
 })
