@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
-import { withRouter } from 'react-router-dom';
+
 
 class EditExercise extends Component {
   constructor(props) {
@@ -25,7 +25,7 @@ class EditExercise extends Component {
   }
 
   componentDidMount() {
-      console.log("ID", this.props.id);
+      console.log("ID", this.props.match);
     axios.get('http://localhost:5000/exercises/'+this.props.match.params.id)
       .then(response => {
         this.setState({
@@ -78,6 +78,8 @@ class EditExercise extends Component {
   }
 
   onSubmit(e) {
+    console.log("Button Clickeddfg");
+
     e.preventDefault();
 
     const exercise = {
@@ -87,7 +89,7 @@ class EditExercise extends Component {
       date: this.state.date
     }
 
-    console.log(exercise);
+    console.log("Button Clicked",exercise);
 
     axios.post('http://localhost:5000/exercises/update/' + this.props.match.params.id, exercise)
       .then(res => console.log(res.data));
@@ -96,6 +98,7 @@ class EditExercise extends Component {
   }
 
   render() {
+
     return (
     <div>
       <h3>Edit Exercise Log</h3>
@@ -154,4 +157,4 @@ class EditExercise extends Component {
   }
 }
 
-export default withRouter(EditExercise)
+export default EditExercise
